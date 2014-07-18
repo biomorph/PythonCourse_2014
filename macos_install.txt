@@ -1,0 +1,133 @@
+Welcome to the QB3 Python Bioinformatics Crash Course!
+
+In this file, you'll find the MacOS instructions for setting up your very own
+personal bioinformatic computing platform with the Python programming language.
+In addition to installing the Python language, we'll also install some
+bioinformatic tools for the course work, and also retrieve a fairly substantial
+amount of data that we'll be processing in the class. Note: Please make sure you are running Mac OS X Version 10.7 or greater. 
+
+========================================================================
+Step Zero: Install XCode
+========================================================================
+
+Option a:
+Dig out your system installation disks and find one labelled something like
+Developer Tools or XCode.  Do a full install of XCode off of that disk.
+
+
+Option b: 
+Go to the App Store app in your /Applications folder (this is different from the iTunes App Store). Search for XCode and install the version compatible with your OS version. It's a large download, so you may want to do it somewhere you have a relatively fast connection. This only applies if you have MacOS X Lion or later (which came out a couple years ago).
+
+Option c:
+Most (but not all) of the tools we're using have Macintosh binaries available,
+so you could skip Step 0 entirely.  This won't be a problem until the last
+couple days of the course. If you're okay missing out on those, you should
+still be able to get through the rest of the course.
+
+Whether you pick option a, b, or c, open up XCode, go to Preferences (under the
+XCode menu), choose the Downloads tab, and make sure that the Command Line
+Tools are installed.
+
+
+========================================================================
+Step One:  Downloading and unpacking the core course file
+========================================================================
+
+First, make sure that you have sufficient disk space to accommodate the data
+and programs we will use in the class.  You can do this by opening the finder
+and looking at the bottom of the Finder window.  You should see a message
+listing the number of items in your directory, as well as a measure of how much
+free space you have available.  In my case, it says "41 items, 87.9 GB
+available."  You should have at least 15 GB available.  If you have less, then
+you need to backup some files (all those mp3s!) to make some space for the
+course work.
+
+Then, click on the following Google Drive link provided in the email to download the files for Mac: PythonCourseMac.tar.gz. You may get a warning: “Google Drive can’t scan this file for viruses.” Click “Download anyway.”
+
+Once the file is downloaded, use the Finder to move the file your home
+directory. If you can’t find your home directory, go to “Finder.” In the top menu bar, click on “Go” and select “Home”. Drag PythonCourseMac.tar.gz into this directory. 
+
+Open the terminal program (if you don't know where to find it, you can use the
+Spotlight search tool to find it by typing "Terminal”). Alternatively, Go to Applications/Utilities/, and you should see the Terminal program (black box icon). 
+
+At the terminal prompt, type the following command:
+
+tar zxvf PythonCourseMac.tar.gz
+
+This command will list the files as they are unpacked into your new
+PythonCourse directory.
+
+========================================================================
+Step Two:  Install the Enthought Python Distribution
+========================================================================
+
+Open Finder, and navigate to the PythonCourse/programFiles directory that
+should now be present underneath your home directory.
+
+Double click the file epd-7.3-1-macosx-i386.dmg and follow the onscreeen
+directions for installation using the default settings. Note: In some cases, your security settings may not allow you to open a file from an “unidentified developer.” To get around this, right click on the file and click “Open with” —> “Installer”. It will prompt you to say “Are you Sure?”. Click “Open”. Alternatively, you change this setting by going to System preferences -> Security & Privacy -> unlock the pane (bottom left of the pane) -> select "Allow apps downloaded from anywhere”.
+
+========================================================================
+Step Three:  Install Chimera
+========================================================================
+
+Go to http://www.cgl.ucsf.edu/chimera/download.html and download the current
+64-bit version of Chimera.  Open the .dmg file in the finder, then drag Chimera to
+your Applications folder.
+
+========================================================================
+Step Four:   Install Aquamacs
+========================================================================
+
+Return to Finder and once again navigate to the PythonCourse/ProgramFiles directory
+
+Now, double-click the file Aquamacs-Emacs-2.4.dmg. A new Finder window should
+open with an icon named Aquamacs. Drag that to the Applications folder.
+
+Now, open Aquamacs from inside your Applications folder, and go to the Tools
+menu, and select "Install Command Line Tools".  This should open up a standard
+Mac installer.  If not, you can keep moving forward, but be sure to grab one of
+the instructors at some point (Now is better than never).
+
+========================================================================
+Step Five:  Install Git
+========================================================================
+
+This will be much like the Enthought installation: double click
+git-1.8.3.2-intel-universal-snow-leopard.dmg, then double click
+git-1.8.3.2-intel-universal-snow-leopard.pkg in the new window that opens, and
+follow the on-screen instructions.
+
+
+========================================================================
+Step Six:  Modify your .bash_profile
+========================================================================
+
+There is a file, hidden in your home directory called ".bash_profile" which
+essentially stores some preferences for your work environment.  To make things
+a little easier, we're going to add a few lines, thereby establishing some new
+shortcuts and preferences. 
+
+To do so, close terminal and open it up again. Type these commands (DO
+NOT copy and paste), exactly as shown with quotations, into the freshly-opened Terminal window. Be careful that you use the double-less-than symbols ‘>>’ and not the single less than ’>’, as these characters mean entirely different things in the terminal window.
+
+echo "alias ls='ls -F -G' " >> .bash_profile 
+echo "alias chimera='/Applications/Chimera.app/Contents/MacOS/chimera' "  >> .bash_profile
+echo “alias aquamacs='/Applications/Aquamacs.app/Contents/MacOS/Aquamacs’ ” >> .bash_profile 
+echo “export EDITOR=aquamacs” >>.bash_profile
+echo "PATH=${PATH}:." >> .bash_profile
+
+
+
+========================================================================
+Step Seven: Test it all out
+========================================================================
+
+Close Terminal and open it up again to a new window. In the new terminal window, type the following commands:
+cd PythonCourse
+python install_test.py
+
+With luck, it give youthe message
+"Installation successful! Good job, now go enjoy your Sunday!." and pop open an Aquamacs window. Otherwise, it will point you to where something went wrong. If you can't figure it out, feel free to grab one of the instructors on installation day.
+
+Note that this test may or may not be susceptible to false positives: just because it says you're fine doesn't mean that we haven't overlooked something, but it's at least a good first step.
