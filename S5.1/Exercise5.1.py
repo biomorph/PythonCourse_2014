@@ -103,8 +103,17 @@ def read_fasta(fasta_file):
         if not fasta_dict[entry].islower() and not fasta_dict[entry].isupper():
             print "Your fasta sequences have a mix of upper and lower case bases"
     return fasta_dict
-'''
+
 
 import sequence_tools
 
 print sequence_tools.read_fasta('testFasta.fa')
+
+print "Git difference"
+'''
+from Bio import  SeqIO
+
+fasta_fh = open('testFasta.fa','r')
+fasta = SeqIO.parse(fasta_fh,'fasta')
+for entry in fasta:
+    print entry.seq

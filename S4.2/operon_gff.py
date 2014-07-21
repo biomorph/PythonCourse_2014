@@ -37,7 +37,7 @@ while len(genes_or_operon_list) > 1:
         intermediate_operon = genes_or_operon_list[-1]
 final_operon_list.append(genes_or_operon_list[0])
 final_operon_list.reverse()
-print final_operon_list
+#print final_operon_list
 
 gene_list_fh = open('full_genelist','r') # open full gene list file
 
@@ -54,6 +54,16 @@ for line in gene_list_fh:
 # for each gene singleton or operon construct a gff line with coordinates and strand
 for feature in final_operon_list:
     # making sure to only print out non empty features
-    if feature: print "Chromosome\tMicrobesOnline\toperon\t"+ gene_list_dict[feature[0]][0] + "\t" + \
+    if len(feature)>1:
+        print "Chromosome\tMicrobesOnline\toperon\t"+ gene_list_dict[feature[0]][0] + "\t" + \
+                      gene_list_dict[feature[-1]][1] + "\t.\t" + gene_list_dict[feature[0]][2] + "\t.\toperonName \"" \
+                      + "-".join(feature) + "\";"
+    if len(feature)==1:
+        if gene_list_dict[feature[0]][2] == '-':
+            print "Chromosome\tMicrobesOnline\toperon\t"+ gene_list_dict[feature[0]][1] + "\t" + \
+                      gene_list_dict[feature[-1]][0] + "\t.\t" + gene_list_dict[feature[0]][2] + "\t.\toperonName \"" \
+                      + "-".join(feature) + "\";"
+        else:
+            print "Chromosome\tMicrobesOnline\toperon\t"+ gene_list_dict[feature[0]][0] + "\t" + \
                       gene_list_dict[feature[-1]][1] + "\t.\t" + gene_list_dict[feature[0]][2] + "\t.\toperonName \"" \
                       + "-".join(feature) + "\";"
