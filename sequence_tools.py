@@ -25,7 +25,7 @@ def reverse_complement(DNA):
         reverse = DNA.upper()[::-1]
         for base in reverse:
             reverse_complement += dna_dict[base]
-    print reverse_complement
+    return reverse_complement
 
 def read_fasta(fasta_file):
     fasta_dict = {}
@@ -34,7 +34,7 @@ def read_fasta(fasta_file):
     gene_name = ''
     for line in fasta_fh:
         line = line.strip()
-        if line[0] == '>':
+        if line.startswith('>'):
             gene_name = line[1:]
             fasta_dict[gene_name] = []
         else:

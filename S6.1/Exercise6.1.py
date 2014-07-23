@@ -9,22 +9,25 @@ float_array = np.arange(10,dtype=float)
 
 print float_array
 print divide_by(float_array)
-
+'''
 
 # 1b) get outliers
 def outliers(random_array, mean, stdev):
-    return random_array[[random_array>mean+stdev]]
+    high_cutoff = random_array>mean+stdev
+    low_cutoff = random_array<mean-stdev
+    cutoff = high_cutoff + low_cutoff
+    return random_array[cutoff]
 
 mean, stdev = 3.2, 1.1
 random_float_array = np.random.normal(mean,stdev,100)
-print random_float_array
+#print random_float_array
 print outliers(random_float_array, mean, stdev)
 
 # 1c) y = e^x
 def exponential_residual(x_array):
     y_array = np.exp(x_array)
     random_exp_array = np.random.exponential(1,11)
-    return np.sum(random_exp_array-y_array)
+    return np.sum(np.sort(random_exp_array)-y_array)
     #print np.sort(random_exp_array)
     #print y_array
 
@@ -56,6 +59,6 @@ for record in fasta_records:
 
 print distance_array
 print np.histogram(distance_array)
-'''
+
 
 

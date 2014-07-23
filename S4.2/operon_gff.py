@@ -50,20 +50,26 @@ for line in gene_list_fh:
     line = line.strip().split("\t")[4:9]
     gene_list_dict[line[-1]] = line[:-2]
 
+#print final_operon_list
+#print gene_list_dict['yaaW']
+operon_out_fh = open('operon.gff','w')
+print len(final_operon_list)
 
 # for each gene singleton or operon construct a gff line with coordinates and strand
 for feature in final_operon_list:
     # making sure to only print out non empty features
-    if len(feature)>1:
+    if len(feature)>0:
+        '''
         print "Chromosome\tMicrobesOnline\toperon\t"+ gene_list_dict[feature[0]][0] + "\t" + \
                       gene_list_dict[feature[-1]][1] + "\t.\t" + gene_list_dict[feature[0]][2] + "\t.\toperonName \"" \
                       + "-".join(feature) + "\";"
     if len(feature)==1:
+        '''
         if gene_list_dict[feature[0]][2] == '-':
-            print "Chromosome\tMicrobesOnline\toperon\t"+ gene_list_dict[feature[0]][1] + "\t" + \
-                      gene_list_dict[feature[-1]][0] + "\t.\t" + gene_list_dict[feature[0]][2] + "\t.\toperonName \"" \
-                      + "-".join(feature) + "\";"
+            operon_out_fh.write("Chromosome\tMicrobesOnline\toperon\t"+ gene_list_dict[feature[0]][1] + "\t" + \
+                          gene_list_dict[feature[-1]][0] + "\t.\t" + gene_list_dict[feature[0]][2] + "\t.\toperonName \"" \
+                          + "-".join(feature) + "\";"+"\n")
         else:
-            print "Chromosome\tMicrobesOnline\toperon\t"+ gene_list_dict[feature[0]][0] + "\t" + \
-                      gene_list_dict[feature[-1]][1] + "\t.\t" + gene_list_dict[feature[0]][2] + "\t.\toperonName \"" \
-                      + "-".join(feature) + "\";"
+            operon_out_fh.write("Chromosome\tMicrobesOnline\toperon\t"+ gene_list_dict[feature[0]][0] + "\t" + \
+                          gene_list_dict[feature[-1]][1] + "\t.\t" + gene_list_dict[feature[0]][2] + "\t.\toperonName \"" \
+                          + "-".join(feature) + "\";"+"\n")
