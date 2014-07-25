@@ -9,7 +9,7 @@ N = int(sys.argv[1])
 
 genome_sequence = read_fasta('random_genome.fa')['Random_genome']
 
-five_prime_ends = np.random.randint(0,len(genome_sequence),size=N)
+five_prime_ends = np.random.randint(0,len(genome_sequence)-100,size=N)
 
 fastq_filename = str(N)+'simulated.fastq'
 fastq_fh = open(fastq_filename,'w')
@@ -38,7 +38,7 @@ for i in range(1,max_coverage+1):
     sum += i*number_of_reads
     print "number of sites with %sX coverage %s" %(i,number_of_reads)
 
-print "average_coverage =", sum/total_reads
+print "average_coverage =", float(sum)/total_reads
 print "expected_coverage=", 100*int(coverage_file.split('s')[0])/genome_length
 print genome_length
 '''
@@ -61,6 +61,7 @@ print len(LRT_array_diff[LRT_array_diff>3.84])
 print len(LRT_array_nodiff[LRT_array_nodiff>3.84])
 
 
+# 3) using wrong model(poisson) for nbinom simulated diff count
 nodiff_nbinom_array = np.loadtxt('nodif.nbinom.txt')
 LRT_array_nodiff_nbinom = np.apply_along_axis(get_LR,1,nodiff_nbinom_array)
 print len(LRT_array_nodiff_nbinom[LRT_array_nodiff_nbinom>3.84])
@@ -68,6 +69,8 @@ print len(LRT_array_nodiff_nbinom[LRT_array_nodiff_nbinom>3.84])
 #print get_LR([50,30])
 #print diff_array
 #print nondiff_array
+
+
 
 
 
